@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { crossBtn, desc, dropdown, item, tickBtn } from './styles/CourseItem.css';
-import data from '../models/fall.json';
 
-const CourseItem = ({ course, handleDelete, id, handleChange }) => {
+const CourseItem = ({ course, handleDelete, id, handleChange, sem }) => {
   const [slots, setSlots] = useState([]);
   const [faculties, setFaculties] = useState([]);
   const [selectedSlot, setSelectedSlot] = useState(course.slots);
@@ -16,20 +15,41 @@ const CourseItem = ({ course, handleDelete, id, handleChange }) => {
     slots: course.slots,
     faculty: course.faculty,
   });
+  const [data, setData] = useState([]);
+
+  const handleCode = () => {
+    const courseCode = course.code;
+    const slotsSet = new Set();
+    const facultiesSet = new Set();
+    data
+      .filter((item) => item['COURSE CODE'] === courseCode)
+      .map((item) => (slotsSet.add(item.SLOT), facultiesSet.add(item['EMPLOYEE NAME'])));
+    setSlots([...slotsSet]);
+    setFaculties([...facultiesSet]);
+  };
 
   useEffect(() => {
-    const handleCode = () => {
-      const courseCode = course.code;
-      const slotsSet = new Set();
-      const facultiesSet = new Set();
-      data
-        .filter((item) => item['COURSE CODE'] === courseCode)
-        .map((item) => (slotsSet.add(item.SLOT), facultiesSet.add(item['EMPLOYEE NAME'])));
-      setSlots([...slotsSet]);
-      setFaculties([...facultiesSet]);
-    };
-    handleCode();
+    async function loadData() {
+      try {
+        let module;
+        if (sem === 'fall') {
+          module = await import('../models/fall.json');
+        } else {
+          module = await import('../models/winter.json');
+        }
+        setData(module.default);
+      } catch (error) {
+        console.log('Error loading JSON: ', error);
+      }
+    }
+    loadData();
   }, []);
+
+  useEffect(() => {
+    if (data.length > 0) {
+      handleCode();
+    }
+  }, [data]);
 
   const handleSlot = (e) => {
     const input = e.target.value;

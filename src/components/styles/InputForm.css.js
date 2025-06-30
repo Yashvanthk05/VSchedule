@@ -80,3 +80,7 @@ export const light = style({
   color: vars.color.muted,
   cursor: 'not-allowed',
 });
+
+export const highlight = style({
+  backgroundColor: vars.color.thead,
+});

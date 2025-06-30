@@ -4,7 +4,6 @@ import CourseList from '../components/CourseList';
 import { getData, saveData } from '../utils/functions';
 import { useState } from 'react';
 import Navbar from '../components/Navbar';
-import data from '../models/fall.json';
 import toast from 'react-hot-toast';
 import Render from './Render';
 
@@ -13,6 +12,26 @@ const Start = () => {
   const [code, setCode] = useState('');
   const [name, setName] = useState('');
   const [coursesuggestion, setCoursesuggestion] = useState([]);
+  const date = new Date();
+  const [sem, setSem] = useState(date.getMonth() >= 5 && date.getMonth() <= 10 ? 'fall' : 'winter');
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    async function loadData() {
+      try {
+        let module;
+        if (sem === 'fall') {
+          module = await import('../models/fall.json');
+        } else {
+          module = await import('../models/winter.json');
+        }
+        setData(module.default);
+      } catch (error) {
+        console.log('Error loading JSON: ', error);
+      }
+    }
+    loadData();
+  }, [sem]);
 
   const handleDelete = (id) => {
     setCourses((oldCourses) => oldCourses.filter((c) => c.id !== id));
@@ -95,7 +114,7 @@ const Start = () => {
           setName={setName}
           handleChange={handleChange}
         />
-        <Render key={1029330} />
+        <Render />
       </div>
     </>
   );

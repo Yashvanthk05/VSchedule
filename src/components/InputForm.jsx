@@ -10,6 +10,7 @@ import {
   suggestion,
   suggestitem,
   light,
+  highlight,
 } from './styles/InputForm.css.js';
 import { toast, Toaster } from 'react-hot-toast';
 import { validate } from '../utils/functions.js';
@@ -23,10 +24,29 @@ const InputForm = ({
   code,
   name,
   handleReset,
+  sem,
+  setSem,
+  setCode,
+  setName,
 }) => {
-  const [sem, setSem] = useState('');
+  const [suggestIdx, setSuggestIdx] = useState(-1);
+  
   const handleSem = (e) => {
-    setSem(e.target.value.toUpperCase());
+    setSem(e.target.value);
+  };
+
+  const handleKeyPress = (e) => {
+    if (suggestIdx > -1 && e.key === 'ArrowUp') {
+      setSuggestIdx((prev) => prev - 1);
+    } else if (suggestIdx < 9 && e.key === 'ArrowDown') {
+      setSuggestIdx((prev) => prev + 1);
+    }
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      const index = suggestIdx >= 0 ? suggestIdx : 0;
+      setCode(coursesuggestion[index].code);
+      setName(coursesuggestion[index].title);
+    }
   };
 
   const handleForm = (e) => {
@@ -68,15 +88,23 @@ const InputForm = ({
           name="ccode"
           id="ccode"
           value={code}
+          onKeyDown={handleKeyPress}
           onChange={handleCode}
+          autoComplete="off"
           autoFocus
         />
         {!name && coursesuggestion.length > 0 && code.length > 0 ? (
           <ul className={suggestion}>
             {coursesuggestion.slice(0, 10).map((item, index) => (
-              <li className={suggestitem} key={index} onClick={() => handleCourse(item)}>
-                {item.display.slice(0, 42)}..
-              </li>
+              <>
+                <li
+                  className={`${suggestitem} ${index === suggestIdx ? highlight : ''}`}
+                  key={index}
+                  onClick={() => handleCourse(item)}
+                >
+                  {item.display.slice(0, 42)}..
+                </li>
+              </>
             ))}
           </ul>
         ) : (
@@ -101,7 +129,17 @@ const InputForm = ({
           Add Course
         </button>
       </div>
-      <Toaster />
+      <Toaster
+        position="bottom-center"
+        reverseOrder={true}
+        toastOptions={{
+          style: {
+            background: '#1e60ff',
+            color: 'white',
+            bottom: '20px',
+          },
+        }}
+      />
     </form>
   );
 };

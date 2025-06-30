@@ -37,7 +37,7 @@ export const button = style({
 });
 
 export const button_c = style({
-  backgroundColor: 'lime',
+  backgroundColor: '#b8fc92',
   flex: 1,
   border: 'none',
   padding: '0.5rem 0',
