@@ -15,11 +15,15 @@ import { getData, transform } from '../utils/functions';
 import { getTemplate } from '../utils/template';
 import QuickViz from './QuickViz';
 
-const Timetable = () => {
+const Timetable = ({refresh}) => {
   const [timetableData, setTimeTableData] = useState(getData());
   const [activeList, setActiveList] = useState([]);
   const timetable = getTemplate();
   const allSlots = transform([...Object.keys(getTemplate())]);
+
+  useEffect(() => {
+    setTimeTableData(getData());
+  }, [refresh]);
 
   useEffect(() => {
     for (let slot of allSlots) {
@@ -49,7 +53,7 @@ const Timetable = () => {
         }
       }
     }
-  }, [activeList]);
+  }, [timetableData]);
 
   return (
     <div>
