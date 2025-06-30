@@ -5,6 +5,7 @@ export const groupContainer = style({
   display: 'flex',
   maxWidth: '1000px',
   margin: 'auto',
+  gap: '1rem',
 });
 
 export const container = style({
@@ -13,6 +14,7 @@ export const container = style({
   width: '450px',
   flexDirection: 'column',
   gap: '0.5rem',
+  flex: 1,
 });
 
 export const row = style({
