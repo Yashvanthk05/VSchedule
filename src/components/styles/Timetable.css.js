@@ -81,3 +81,29 @@ export const clash = style({
     backgroundColor: '#ff6161',
   },
 });
+
+export const btn=style({
+  border:'none',
+  padding:'10px',
+  display:'flex',
+  gap:'8px',
+  borderRadius:'6px',
+  fontWeight:600,
+  cursor:'pointer'
+})
+
+export const btns=style({
+  display:'flex',
+  gap:'10px',
+  alignItems:'center',
+  justifyContent:'center'
+})
+
+export const reset = style({
+  backgroundColor: '#ff6161',
+  color:'white'
+});
+
+export const download = style({
+  backgroundColor: '#b8fc92',
+});
