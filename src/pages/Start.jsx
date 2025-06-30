@@ -2,13 +2,13 @@ import { container } from './styles/Start.css';
 import InputForm from '../components/InputForm';
 import CourseList from '../components/CourseList';
 import { getData, saveData } from '../utils/functions';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import toast from 'react-hot-toast';
 import Render from './Render';
 
 const Start = () => {
-  const [courses, setCourses] = useState(getData());
+  const [courses, setCourses] = useState([]);
   const [code, setCode] = useState('');
   const [name, setName] = useState('');
   const [coursesuggestion, setCoursesuggestion] = useState([]);
@@ -33,9 +33,14 @@ const Start = () => {
     loadData();
   }, [sem]);
 
+  useEffect(() => {
+    const data = getData();
+    setCourses(data);
+  }, []);
+
   const handleDelete = (id) => {
-    setCourses((oldCourses) => oldCourses.filter((c) => c.id !== id));
     saveData(courses.filter((c) => c.id !== id));
+    setCourses((oldCourses) => oldCourses.filter((c) => c.id !== id));
     toast.success('Course Deleted Successfully');
   };
 
@@ -95,28 +100,31 @@ const Start = () => {
   };
 
   return (
-    <>
-      <div className={container}>
-        <Navbar />
-        <InputForm
-          handleAdd={handleAdd}
-          handleCode={handleCode}
-          handleCourse={handleCourse}
-          handleReset={handleReset}
-          coursesuggestion={coursesuggestion}
-          code={code}
-          name={name}
-        />
-        <CourseList
-          courses={courses}
-          handleDelete={handleDelete}
-          setCode={setCode}
-          setName={setName}
-          handleChange={handleChange}
-        />
-        <Render />
-      </div>
-    </>
+    <div className={container}>
+      <Navbar />
+      <InputForm
+        handleAdd={handleAdd}
+        handleCode={handleCode}
+        handleCourse={handleCourse}
+        handleReset={handleReset}
+        coursesuggestion={coursesuggestion}
+        code={code}
+        name={name}
+        sem={sem}
+        setSem={setSem}
+        setCode={setCode}
+        setName={setName}
+      />
+      <CourseList
+        courses={courses}
+        handleDelete={handleDelete}
+        setCode={setCode}
+        setName={setName}
+        handleChange={handleChange}
+        sem={sem}
+      />
+      <Render />
+    </div>
   );
 };
 
