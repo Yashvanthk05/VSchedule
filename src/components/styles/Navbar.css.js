@@ -10,6 +10,16 @@ export const navbar = style({
   height: 60,
 });
 
+export const nav_section = style({
+  display: 'flex',
+  alignItems: 'baseline',
+  gap: '1rem',
+});
+
+export const navhead = style({
+  fontWeight: 'bold',
+});
+
 globalStyle(`${navbar} a`, {
   textDecoration: 'none',
   color: 'white',

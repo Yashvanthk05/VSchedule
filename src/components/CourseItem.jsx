@@ -118,7 +118,7 @@ const CourseItem = ({ course, handleDelete, id, handleChange, sem }) => {
           value={selectedFaculty}
         >
           <option value="" disabled hidden>
-            Select Slot
+            Select faculty
           </option>
           {faculties.map((item, index) => (
             <option key={index} value={item}>

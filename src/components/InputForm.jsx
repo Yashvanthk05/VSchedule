@@ -30,7 +30,7 @@ const InputForm = ({
   setName,
 }) => {
   const [suggestIdx, setSuggestIdx] = useState(-1);
-
+  
   const handleSem = (e) => {
     setSem(e.target.value);
   };
@@ -112,7 +112,7 @@ const InputForm = ({
         )}
       </div>
       <div className={section}>
-        <label className={`${label} ${name ? '' : light}`} htmlFor="title">
+        <label className={`${label}`} htmlFor="title">
           Title:
         </label>
         {name ? (

@@ -27,7 +27,6 @@ const App = () => {
         <Route path="/vit-ffcs-planner/" element={<Home />} />
         <Route path="/vit-ffcs-planner/home" element={<Home />} />
         <Route path="/vit-ffcs-planner/start" element={<Start />} />
-        <Route path="/vit-ffcs-planner/render" element={<Render />} />
       </Routes>
     </div>
   );
