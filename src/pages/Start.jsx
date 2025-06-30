@@ -15,6 +15,7 @@ const Start = () => {
   const date = new Date();
   const [sem, setSem] = useState(date.getMonth() >= 5 && date.getMonth() <= 10 ? 'fall' : 'winter');
   const [data, setData] = useState([]);
+  const [refresh, setRefresh] = useState(0);
 
   useEffect(() => {
     async function loadData() {
@@ -52,6 +53,7 @@ const Start = () => {
   const handleChange = (course) => {
     saveData([...courses.filter((c) => c.id !== course.id), course]);
     setCourses(getData());
+    setRefresh((prev) => prev + 1);
     toast.success('Course Updated Successfully');
   };
 
@@ -123,7 +125,7 @@ const Start = () => {
         handleChange={handleChange}
         sem={sem}
       />
-      <Render />
+      <Render refresh={refresh} />
     </div>
   );
 };
