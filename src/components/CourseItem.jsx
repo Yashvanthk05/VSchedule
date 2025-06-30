@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { crossBtn, desc, dropdown, item, tickBtn } from './styles/CourseItem.css';
+import toast from 'react-hot-toast';
 
 const CourseItem = ({ course, handleDelete, id, handleChange, sem }) => {
   const [slots, setSlots] = useState([]);
@@ -98,6 +99,7 @@ const CourseItem = ({ course, handleDelete, id, handleChange, sem }) => {
           className={dropdown}
           onChange={handleSlot}
           value={selectedSlotOg}
+          required
         >
           <option value="" disabled hidden>
             Select Slot
@@ -131,7 +133,16 @@ const CourseItem = ({ course, handleDelete, id, handleChange, sem }) => {
         <button className={crossBtn} onClick={() => handleDelete(id)}>
           &#x2715;
         </button>
-        <button className={tickBtn} onClick={() => handleChange(updatedCourse)}>
+        <button
+          className={tickBtn}
+          onClick={() => {
+            if (!selectedFaculty || !selectedSlot) {
+              toast.error('Select both faculty and slot');
+            } else {
+              handleChange(updatedCourse);
+            }
+          }}
+        >
           &#10004;
         </button>
       </div>
