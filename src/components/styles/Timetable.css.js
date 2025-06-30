@@ -24,6 +24,7 @@ export const theader = style({
 export const table = style({
   borderCollapse: 'collapse',
   marginBottom: '3rem',
+  cursor: 'pointer',
 });
 
 export const tdefault = style({
@@ -44,14 +45,6 @@ export const lunch_bg = style({
 });
 
 export const lunch = style({
-  // writingMode: 'vertical-lr',
-  // textAlign: 'center',
-  // verticalAlign: 'middle',
-  // letterSpacing: 4,
-  // textOrientation: 'upright',
-  // fontWeight: 700,
-  // border: `1px solid ${vars.color.border}`,
-  // lineHeight: '1.2',
   display: 'flex',
   flexDirection: 'column',
   flex: 1,

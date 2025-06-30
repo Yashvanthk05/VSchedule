@@ -76,7 +76,7 @@ const Timetable = ({ refresh, setRefresh }) => {
 
   return (
     <div>
-      <QuickViz setActiveList={setActiveList} />
+      <QuickViz setActiveList={setActiveList} activeList={activeList} />
       <div>
         <div className={btns}>
           <button className={`${btn} ${reset}`} onClick={() => resetTimetable()}>
@@ -139,6 +139,11 @@ const Timetable = ({ refresh, setRefresh }) => {
                       id={`_${slot.split(' / ')[0].toLowerCase()}_${slot
                         .split(' / ')[1]
                         ?.toLowerCase()}_`}
+                      onClick={() => {
+                        activeList.includes(slot.split(' / ')[0])
+                          ? setActiveList(activeList.filter((i) => i !== slot.split(' / ')[0]))
+                          : setActiveList((prev) => [...prev, slot.split(' / ')[0]]);
+                      }}
                     >
                       {slot}
                     </td>
