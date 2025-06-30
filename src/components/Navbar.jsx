@@ -5,7 +5,7 @@ const Navbar = () => {
   return (
     <div className={navbar}>
       <div className={nav_section}>
-        <a href="/" className={navhead}>
+        <a href="/vit-ffcs-planner" className={navhead}>
           FFCS Planner
         </a>
       </div>
