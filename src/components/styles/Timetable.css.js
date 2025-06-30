@@ -87,16 +87,17 @@ export const btn = style({
 
 export const btns = style({
   display: 'flex',
-  gap: '10px',
+  gap: '1rem',
   alignItems: 'center',
-  justifyContent: 'center',
+  justifyContent: 'end',
 });
 
 export const reset = style({
-  backgroundColor: '#ff6161',
+  backgroundColor: vars.color.danger,
   color: 'white',
 });
 
 export const download = style({
-  backgroundColor: '#b8fc92',
+  backgroundColor: vars.color.primary,
+  color: 'white',
 });

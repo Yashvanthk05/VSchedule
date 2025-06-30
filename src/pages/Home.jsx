@@ -23,7 +23,7 @@ const Home = () => {
           Get started &rarr;
         </button>
       </main>
-      <footer className={footer}>&copy; {year} kdx-08. All rights reserved.</footer>
+      <footer className={footer}>&copy; {year} kdx-08 &amp; Yashix. All rights reserved.</footer>
     </div>
   );
 };
