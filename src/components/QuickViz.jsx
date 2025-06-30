@@ -1,10 +1,7 @@
-import { useEffect } from 'react';
 import QuickButton from './QuickButton';
 import { container, row, row_h, groupContainer } from './styles/QuickViz.css';
 
 const QuickViz = ({ setActiveList, activeList }) => {
-  useEffect(() => {}, [activeList]);
-
   return (
     <div>
       <div className={row_h}>Quick Visualization</div>

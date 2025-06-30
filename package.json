@@ -2,7 +2,7 @@
   "name": "vit-ffcs-planner",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://kdx-08.github.io/vit-ffcs-planner/home",
+  "homepage": "https://kdx-08.github.io/vit-ffcs-planner/",
   "type": "module",
   "scripts": {
     "dev": "vite",
