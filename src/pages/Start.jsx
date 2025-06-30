@@ -2,26 +2,22 @@ import { container } from './styles/Start.css';
 import InputForm from '../components/InputForm';
 import CourseList from '../components/CourseList';
 import { getData, saveData } from '../utils/functions';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Navbar from '../components/Navbar';
 import data from '../models/fall.json';
 import toast from 'react-hot-toast';
+import Render from './Render';
 
 const Start = () => {
-  const [courses, setCourses] = useState([]);
+  const [courses, setCourses] = useState(getData());
   const [code, setCode] = useState('');
   const [name, setName] = useState('');
   const [coursesuggestion, setCoursesuggestion] = useState([]);
 
-  useEffect(() => {
-    const data = getData();
-    setCourses(data);
-  }, []);
-
   const handleDelete = (id) => {
-    saveData(courses.filter((c) => c.id !== id));
     setCourses((oldCourses) => oldCourses.filter((c) => c.id !== id));
-    toast.success("Course Deleted Successfully");
+    saveData(courses.filter((c) => c.id !== id));
+    toast.success('Course Deleted Successfully');
   };
 
   const handleAdd = (course) => {
@@ -32,7 +28,7 @@ const Start = () => {
   const handleChange = (course) => {
     saveData([...courses.filter((c) => c.id !== course.id), course]);
     setCourses(getData());
-    toast.success("Course Updated Successfully");
+    toast.success('Course Updated Successfully');
   };
 
   const handleCode = (e) => {
@@ -80,25 +76,28 @@ const Start = () => {
   };
 
   return (
-    <div className={container}>
-      <Navbar />
-      <InputForm
-        handleAdd={handleAdd}
-        handleCode={handleCode}
-        handleCourse={handleCourse}
-        handleReset={handleReset}
-        coursesuggestion={coursesuggestion}
-        code={code}
-        name={name}
-      />
-      <CourseList
-        courses={courses}
-        handleDelete={handleDelete}
-        setCode={setCode}
-        setName={setName}
-        handleChange={handleChange}
-      />
-    </div>
+    <>
+      <div className={container}>
+        <Navbar />
+        <InputForm
+          handleAdd={handleAdd}
+          handleCode={handleCode}
+          handleCourse={handleCourse}
+          handleReset={handleReset}
+          coursesuggestion={coursesuggestion}
+          code={code}
+          name={name}
+        />
+        <CourseList
+          courses={courses}
+          handleDelete={handleDelete}
+          setCode={setCode}
+          setName={setName}
+          handleChange={handleChange}
+        />
+        <Render key={1029330} />
+      </div>
+    </>
   );
 };
 

@@ -3,7 +3,7 @@ import { sechead } from '../pages/styles/Section.css';
 import { noCaption, courseContainer, listTitle } from './styles/CourseList.css';
 import { desc, item } from './styles/CourseItem.css';
 
-const CourseList = ({ courses, handleDelete, handleChange }) => {
+const CourseList = ({ courses, handleDelete, handleChange, dummy }) => {
   return (
     <div>
       <h2 className={sechead}>Course List</h2>
@@ -18,15 +18,14 @@ const CourseList = ({ courses, handleDelete, handleChange }) => {
             </div>
             {courses.map((course, index) => (
               <>
-              <CourseItem
-                course={course}
-                handleDelete={handleDelete}
-                id={course.id}
-                key={course.id}
-                handleChange={handleChange}
-              />
+                <CourseItem
+                  course={course}
+                  handleDelete={handleDelete}
+                  id={course.id}
+                  key={course.id}
+                  handleChange={handleChange}
+                />
               </>
-              
             ))}
           </div>
         ) : (

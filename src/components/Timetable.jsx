@@ -24,7 +24,7 @@ const Timetable = () => {
   useEffect(() => {
     for (let slot of allSlots) {
       const block = document.getElementById(slot);
-      block?.classList?.remove(filled);
+      block.classList.remove(filled);
     }
     if (activeList.length > 0) {
       const transformedSlots = transform(activeList.map((i) => `_${i.toLowerCase()}_`));
@@ -44,7 +44,6 @@ const Timetable = () => {
           block.classList.add(filled);
           block.innerText = course.code;
         } else {
-          console.log(`${course.code} is clashing`);
           block.innerText += ` ${course.code}`;
           block.classList.add(clash);
         }

@@ -1,12 +1,14 @@
 import { FaGithub } from 'react-icons/fa6';
-import { navbar } from './styles/Navbar.css';
+import { navbar, nav_section, navhead } from './styles/Navbar.css';
 
 const Navbar = () => {
   return (
     <div className={navbar}>
-      <a href="/" style={{ fontWeight: 700 }}>
-        FFCS Planner
-      </a>
+      <div className={nav_section}>
+        <a href="/" className={navhead}>
+          FFCS Planner
+        </a>
+      </div>
       <a
         style={{
           display: 'flex',
