@@ -20,8 +20,6 @@ import { getTemplate } from '../utils/template';
 import QuickViz from './QuickViz';
 import { LuRefreshCcw } from 'react-icons/lu';
 import { HiDownload } from 'react-icons/hi';
-import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
 
 const Timetable = ({ refresh, setRefresh }) => {
   const [timetableData, setTimeTableData] = useState(getData());
@@ -70,6 +68,7 @@ const Timetable = ({ refresh, setRefresh }) => {
   }, [timetableData, activeList]);
 
   const resetTimetable = () => {
+    setActiveList([]);
     saveData([]);
     setRefresh((prev) => prev + 1);
   };

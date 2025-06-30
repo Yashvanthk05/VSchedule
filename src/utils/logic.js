@@ -6,7 +6,6 @@ export const generateTimetable = () => {
   const data = getData();
   const timetable = getTemplate();
   const registeredCourses = [];
-  console.log(data);
   for (let course of data) {
     if (registeredCourses.indexOf(course.code) === -1) {
       const formattedSlots = course.slots.split(',').map((s) => s.toLowerCase());
@@ -23,5 +22,4 @@ export const generateTimetable = () => {
       });
     }
   }
-  console.log(timetable);
 };
