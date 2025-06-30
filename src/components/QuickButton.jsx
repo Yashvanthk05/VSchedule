@@ -1,8 +1,17 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { button_c, button } from './styles/QuickViz.css';
 
-const QuickButton = ({ value, setActiveList }) => {
+const QuickButton = ({ value, setActiveList, activeList }) => {
   const [isActive, setIsActive] = useState(false);
+
+  useEffect(() => {
+    if (activeList.includes(value)) {
+      setIsActive(true);
+    } else {
+      setIsActive(false);
+    }
+  }, [activeList]);
+
   return (
     <button
       className={isActive ? button_c : button}

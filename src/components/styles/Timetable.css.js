@@ -24,6 +24,7 @@ export const theader = style({
 export const table = style({
   borderCollapse: 'collapse',
   marginBottom: '3rem',
+  cursor: 'pointer',
 });
 
 export const tdefault = style({
@@ -44,14 +45,6 @@ export const lunch_bg = style({
 });
 
 export const lunch = style({
-  // writingMode: 'vertical-lr',
-  // textAlign: 'center',
-  // verticalAlign: 'middle',
-  // letterSpacing: 4,
-  // textOrientation: 'upright',
-  // fontWeight: 700,
-  // border: `1px solid ${vars.color.border}`,
-  // lineHeight: '1.2',
   display: 'flex',
   flexDirection: 'column',
   flex: 1,
@@ -82,26 +75,26 @@ export const clash = style({
   },
 });
 
-export const btn=style({
-  border:'none',
-  padding:'10px',
-  display:'flex',
-  gap:'8px',
-  borderRadius:'6px',
-  fontWeight:600,
-  cursor:'pointer'
-})
+export const btn = style({
+  border: 'none',
+  padding: '10px',
+  display: 'flex',
+  gap: '8px',
+  borderRadius: '6px',
+  fontWeight: 600,
+  cursor: 'pointer',
+});
 
-export const btns=style({
-  display:'flex',
-  gap:'10px',
-  alignItems:'center',
-  justifyContent:'center'
-})
+export const btns = style({
+  display: 'flex',
+  gap: '10px',
+  alignItems: 'center',
+  justifyContent: 'center',
+});
 
 export const reset = style({
   backgroundColor: '#ff6161',
-  color:'white'
+  color: 'white',
 });
 
 export const download = style({
