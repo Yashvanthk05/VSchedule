@@ -15,7 +15,7 @@ import { getData, transform } from '../utils/functions';
 import { getTemplate } from '../utils/template';
 import QuickViz from './QuickViz';
 
-const Timetable = ({refresh}) => {
+const Timetable = ({ refresh }) => {
   const [timetableData, setTimeTableData] = useState(getData());
   const [activeList, setActiveList] = useState([]);
   const timetable = getTemplate();
@@ -29,6 +29,12 @@ const Timetable = ({refresh}) => {
     for (let slot of allSlots) {
       const block = document.getElementById(slot);
       block.classList.remove(filled);
+      block.classList.remove(clash);
+      block.innerText = slot
+        .slice(1, slot.length - 1)
+        .replace('_', ' / ')
+        .replace(' / undefined', '')
+        .toUpperCase();
     }
     if (activeList.length > 0) {
       const transformedSlots = transform(activeList.map((i) => `_${i.toLowerCase()}_`));
@@ -53,7 +59,7 @@ const Timetable = ({refresh}) => {
         }
       }
     }
-  }, [timetableData]);
+  }, [timetableData, activeList]);
 
   return (
     <div>

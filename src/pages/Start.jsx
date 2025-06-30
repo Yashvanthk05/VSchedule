@@ -42,6 +42,7 @@ const Start = () => {
   const handleDelete = (id) => {
     saveData(courses.filter((c) => c.id !== id));
     setCourses((oldCourses) => oldCourses.filter((c) => c.id !== id));
+    setRefresh((prev) => prev + 1);
     toast.success('Course Deleted Successfully');
   };
 
