@@ -126,7 +126,7 @@ const Start = () => {
         handleChange={handleChange}
         sem={sem}
       />
-      <Render refresh={refresh} />
+      <Render refresh={refresh} setRefresh={setRefresh} />
     </div>
   );
 };

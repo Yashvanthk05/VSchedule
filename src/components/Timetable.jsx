@@ -23,7 +23,7 @@ import { HiDownload } from 'react-icons/hi';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 
-const Timetable = ({ refresh }) => {
+const Timetable = ({ refresh, setRefresh }) => {
   const [timetableData, setTimeTableData] = useState(getData());
   const [activeList, setActiveList] = useState([]);
   const timetable = getTemplate();
@@ -67,23 +67,12 @@ const Timetable = ({ refresh }) => {
         }
       }
     }
-  }, [timetableData,activeList]);
+  }, [timetableData, activeList]);
 
-  const printDocument = () => {
-    const input = document.getElementById('printTable');
-    html2canvas(input).then((canvas) => {
-      const imgData = canvas.toDataURL('image/png');
-      const pdf = new jsPDF({
-        orientation: 'landscape',
-        unit: 'pt',
-        format: [canvas.width, canvas.height],
-      });
-      pdf.addImage(imgData, 'PNG', 0, 0, canvas.width, canvas.height);
-      pdf.save('timetable.pdf');
-    });
+  const resetTimetable = () => {
+    saveData([]);
+    setRefresh((prev) => prev + 1);
   };
-
-  const resetTimetable = () => {};
 
   return (
     <div>
@@ -93,7 +82,7 @@ const Timetable = ({ refresh }) => {
           <button className={`${btn} ${reset}`} onClick={() => resetTimetable()}>
             <LuRefreshCcw /> Reset
           </button>
-          <button className={`${btn} ${download}`} onClick={() => printDocument()}>
+          <button className={`${btn} ${download}`} onClick={() => window.print()}>
             <HiDownload /> Download
           </button>
         </div>
