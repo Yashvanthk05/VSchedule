@@ -5,6 +5,7 @@ import Render from './pages/Render';
 import { themeClass } from './style.css';
 import { globalStyles } from './style.css';
 import { useEffect } from 'react';
+import Generate from './pages/Generate';
 
 const App = () => {
   useEffect(() => {
@@ -27,6 +28,7 @@ const App = () => {
         <Route path="/vit-ffcs-planner/" element={<Home />} />
         <Route path="/vit-ffcs-planner/home" element={<Home />} />
         <Route path="/vit-ffcs-planner/start" element={<Start />} />
+        <Route path="/vit-ffcs-planner/generate" element={<Generate />} />
       </Routes>
     </div>
   );
