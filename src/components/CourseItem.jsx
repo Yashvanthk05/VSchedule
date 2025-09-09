@@ -136,7 +136,7 @@ const CourseItem = ({ course, handleDelete, id, handleChange, sem }) => {
         <button
           className={tickBtn}
           onClick={() => {
-            if (!selectedFaculty || !selectedSlot) {
+            if (!selectedFaculty && !selectedSlot) {
               toast.error('Select both faculty and slot');
             } else {
               handleChange(updatedCourse);
