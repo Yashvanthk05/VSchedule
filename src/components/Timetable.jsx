@@ -51,17 +51,19 @@ const Timetable = ({ refresh, setRefresh }) => {
     }
 
     for (let course of timetableData) {
-      const slots = transform(course.slots.split(',').map((s) => s.toLowerCase()));
-      for (let slot of slots) {
-        const block = document.getElementById(slot);
-        if (!timetable[slot].isFilled) {
-          timetable[slot].code = course.code;
-          timetable[slot].isFilled = true;
-          block.classList.add(filled);
-          block.innerText = course.code;
-        } else {
-          block.innerText += ` ${course.code}`;
-          block.classList.add(clash);
+      if (course.slots) {
+        const slots = transform(course.slots.split(',').map((s) => s.toLowerCase()));
+        for (let slot of slots) {
+          const block = document.getElementById(slot);
+          if (!timetable[slot].isFilled) {
+            timetable[slot].code = course.code;
+            timetable[slot].isFilled = true;
+            block.classList.add(filled);
+            block.innerText = `${block.innerText}\n${course.code}`;
+          } else {
+            block.innerText += ` ${course.code}`;
+            block.classList.add(clash);
+          }
         }
       }
     }

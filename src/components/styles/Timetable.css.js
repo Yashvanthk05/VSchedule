@@ -7,28 +7,18 @@ export const ttheader = style({
   whiteSpace: 'pre-line',
   padding: '10px 8px',
   fontWeight: 600,
-  border: `1px solid ${vars.color.border}`,
   backgroundColor: vars.color.primary,
   color: vars.color.base,
 });
 
 export const theader = style({
-  border: '1px solid',
-  backgroundColor: vars.color.secondary,
-  color: vars.color.base,
-  fontWeight: 600,
-  textAlign: 'center',
-  border: `1px solid ${vars.color.border}`,
 });
 
 export const table = style({
-  borderCollapse: 'collapse',
-  marginBottom: '3rem',
-  cursor: 'pointer',
 });
 
 export const tdefault = style({
-  backgroundColor: 'aliceblue',
+  backgroundColor: vars.color.cell,
   color: 'black',
   selectors: {
     '&:hover': {
@@ -63,6 +53,7 @@ export const day = style({
 
 export const filled = style({
   backgroundColor: '#b8fc92',
+  cursor: 'pointer',
   ':hover': {
     backgroundColor: '#b8fc92',
   },

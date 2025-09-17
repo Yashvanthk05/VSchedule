@@ -1,5 +1,5 @@
 import { slotList } from './slotList';
-import falldata from '../models/fall.json';
+import falldata from '../models/winter.json';
 import { PiCheckSquareOffsetDuotone } from 'react-icons/pi';
 
 export const getData = () => {
@@ -58,17 +58,18 @@ export const generate = () => {
       }
       optimized[subject.code] = uniqueSlots;
     });
-    console.log(optimized);
     const subjects = Object.keys(optimized);
     const results = [];
-    console.log(subjects);
-    const backtrack = (index, chosen, used) => {
-      if (index === subjects.length) {
-        results.push([...chosen]);
+    const n = subjects.length;
+    function backtrack(index) {
+      if (index === n) {
+        results.push(Array.from(chosen));
         return;
       }
       const subject = subjects[index];
-      for (const slot of optimized[subject]) {
+      const slotsArr = optimized[subject];
+      if (slotsArr.length === 1) {
+        const slot = slotsArr[0];
         const slotParts = slot.split(',');
         let clash = false;
         for (const part of slotParts) {
@@ -79,24 +80,43 @@ export const generate = () => {
         }
         if (!clash) {
           slotParts.forEach((p) => used.add(p));
-          chosen.push(`${subject}-${slot}`);
-          backtrack(index + 1, chosen, used);
-          chosen.pop();
+          chosen[index] = `${subject}-${slot}`;
+          backtrack(index + 1);
+          slotParts.forEach((p) => used.delete(p));
+        }
+        return;
+      }
+      for (let i = 0; i < slotsArr.length; ++i) {
+        const slot = slotsArr[i];
+        const slotParts = slot.split(',');
+        let clash = false;
+        for (let j = 0; j < slotParts.length; ++j) {
+          if (used.has(slotParts[j])) {
+            clash = true;
+            break;
+          }
+        }
+        if (!clash) {
+          slotParts.forEach((p) => used.add(p));
+          chosen[index] = `${subject}-${slot}`;
+          backtrack(index + 1);
           slotParts.forEach((p) => used.delete(p));
         }
       }
-    };
-    backtrack(0, [], new Set());
+    }
+    const chosen = new Array(n);
+    const used = new Set();
+    backtrack(0);
     return results;
   }
 };
 
 export const generate_transform = (slots) => {
-  console.log(slots);
   let transformedSlots = [];
   for (let slot of slots) {
-    transformedSlots = transformedSlots.concat(slotList.filter((i) => i.includes(slot.toLowerCase())));
+    transformedSlots = transformedSlots.concat(
+      slotList.filter((i) => i.includes(slot.toLowerCase()))
+    );
   }
-  console.log(transformedSlots);
   return transformedSlots;
 };

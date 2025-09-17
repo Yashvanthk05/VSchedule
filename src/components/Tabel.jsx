@@ -29,7 +29,7 @@ const Table = ({ table, tableid }) => {
 
   useEffect(() => {
     for (let slot of allSlots) {
-      const block = document.getElementById(slot+`_${tableid}`);
+      const block = document.getElementById(slot + `_${tableid}`);
       block.classList.remove(filled);
       block.classList.remove(clash);
       block.innerText = slot
@@ -41,12 +41,11 @@ const Table = ({ table, tableid }) => {
     for (let subject of table) {
       const transformedSlots = generate_transform(subject.split('-')[1].split(','));
       for (let slot of transformedSlots) {
-        const block = document.getElementById(slot+`_${tableid}`);
+        const block = document.getElementById(slot + `_${tableid}`);
         block.classList.add(filled);
         block.innerText += '\n' + subject.split('-')[0];
       }
     }
-    console.log('Table');
   }, [table]);
 
   return (
@@ -127,6 +126,15 @@ const Table = ({ table, tableid }) => {
             ))}
           </tbody>
         </table>
+      </div>
+      <div>
+        <p>Timetable {tableid+1}</p>
+        {table.map((subject) => (
+          <>
+            <span>{subject.split('-')[0]} - {subject.split('-')[1].split(',').map(i=>i.replaceAll('_','')).join('+')}</span>
+            <br />
+          </>
+        ))}
       </div>
     </div>
   );

@@ -7,9 +7,10 @@ export const form = style({
   gap: '2rem',
   padding: '2rem',
   width: '600px',
-  backgroundColor: vars.color.accent,
+  backgroundColor: vars.color.secondary,
   margin: 'auto',
-  borderRadius: '4px',
+  border:`1px solid ${vars.color.border}`,
+  borderRadius: '8px',
 });
 
 export const section = style({
@@ -28,8 +29,9 @@ export const input = style({
   flex: 1,
   padding: '0.5rem',
   backgroundColor: 'white',
-  outlineColor: vars.color.secondary,
-  border: 'none',
+  border: `1px solid ${vars.color.accent}`,
+  borderRadius:'5px',
+  outlineColor:vars.color.border
 });
 
 export const buttons = style({
