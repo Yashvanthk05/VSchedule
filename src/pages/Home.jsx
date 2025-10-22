@@ -7,14 +7,14 @@ const Home = () => {
   const navigate = useNavigate();
 
   const handleRedirect = () => {
-    navigate('/vit-ffcs-planner/start');
+    navigate('/vschedule/start');
   };
 
   return (
     <div className={container}>
       <Navbar />
       <main className={hero}>
-        <h1 className={h1}>VIT FFCS Planner</h1>
+        <h1 className={h1}>Welcome to VSchedule, a VIT FFCS Planner</h1>
         <div>
           <p className={p}>Build your perfect VIT timetable in seconds</p>
           <p className={p}>No more clashes. No more confusion.</p>

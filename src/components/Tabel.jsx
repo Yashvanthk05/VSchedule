@@ -15,13 +15,14 @@ import {
   download,
   reset,
 } from './styles/Timetable.css';
+import { tttitle, tttext } from './styles/Table.css';
 import { generate_transform, getData, saveData, transform } from '../utils/functions';
 import { getTemplate } from '../utils/template';
 import QuickViz from './QuickViz';
 import { LuRefreshCcw } from 'react-icons/lu';
 import { HiDownload } from 'react-icons/hi';
 
-const Table = ({ table, tableid }) => {
+const Table = ({ table, tableid, hidden }) => {
   const [timetableData, setTimeTableData] = useState(getData());
   const [activeList, setActiveList] = useState([]);
   const timetable = getTemplate();
@@ -49,12 +50,16 @@ const Table = ({ table, tableid }) => {
   }, [table]);
 
   return (
-    <div>
+    <div style={{ marginBottom: '2rem' , alignItems: 'center', display: 'flex', flexDirection: 'column'}}>
       <div>
         <div className={btns}>
+          {!hidden && (
           <button className={`${btn} ${reset}`} onClick={() => resetTimetable()}>
             <LuRefreshCcw /> Reset
           </button>
+        )}
+        
+          
           <button className={`${btn} ${download}`} onClick={() => window.print()}>
             <HiDownload /> Download
           </button>
@@ -127,8 +132,8 @@ const Table = ({ table, tableid }) => {
           </tbody>
         </table>
       </div>
-      <div>
-        <p>Timetable {tableid+1}</p>
+      <div className={tttext}>
+        <p className={tttitle}>Timetable {tableid+1}</p>
         {table.map((subject) => (
           <>
             <span>{subject.split('-')[0]} - {subject.split('-')[1].split(',').map(i=>i.replaceAll('_','')).join('+')}</span>

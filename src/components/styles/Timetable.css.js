@@ -92,3 +92,8 @@ export const download = style({
   backgroundColor: vars.color.primary,
   color: 'white',
 });
+
+export const generate = style({
+  backgroundColor: '#f0f9ff',
+  border: '2px solid #3b82f6',
+});

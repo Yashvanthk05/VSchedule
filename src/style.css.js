@@ -30,4 +30,9 @@ export const globalStyles = `@import url('https://fonts.googleapis.com/css2?fami
 
 ::-webkit-scrollbar {
   display: none;
+}
+
+#printTable{
+  margin-bottom: 20px;
+  border: 4px dashed ${vars.color.border};
 }`;
