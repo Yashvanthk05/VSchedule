@@ -7,7 +7,7 @@ const Home = () => {
   const navigate = useNavigate();
 
   const handleRedirect = () => {
-    navigate('/vit-ffcs-planner/start');
+    navigate('/start');
   };
 
   return (

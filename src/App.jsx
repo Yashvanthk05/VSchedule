@@ -25,10 +25,10 @@ const App = () => {
   return (
     <div className={themeClass}>
       <Routes>
-        <Route path="/vit-ffcs-planner/" element={<Home />} />
-        <Route path="/vit-ffcs-planner/home" element={<Home />} />
-        <Route path="/vit-ffcs-planner/start" element={<Start />} />
-        <Route path="/vit-ffcs-planner/generate" element={<Generate />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/start" element={<Start />} />
+        <Route path="=/generate" element={<Generate />} />
       </Routes>
     </div>
   );

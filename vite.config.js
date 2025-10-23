@@ -5,5 +5,5 @@ import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), vanillaExtractPlugin()],
-  base: '/vit-ffcs-planner/',
+  base: '/',
 });
