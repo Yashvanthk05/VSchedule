@@ -5,7 +5,7 @@ const Navbar = () => {
   return (
     <div className={navbar}>
       <div className={nav_section}>
-        <a href="/vschedule/" className={navhead}>
+        <a href="/" className={navhead}>
           VSchedule
         </a>
       </div>
@@ -20,7 +20,7 @@ const Navbar = () => {
           fontSize: 18,
           color: 'black',
         }}
-        href="https://github.com/kdx-08/vit-ffcs-planner"
+        href="https://github.com/Yashvanthk05/VSchedule"
         target="_blank"
       >
         <FaGithub size={22} /> Github
