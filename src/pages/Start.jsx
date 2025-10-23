@@ -1,4 +1,4 @@
-import { container } from './styles/Start.css';
+import { container,timetableGenerationContainer } from './styles/Start.css';
 import InputForm from '../components/InputForm';
 import CourseList from '../components/CourseList';
 import { getData, saveData } from '../utils/functions';

@@ -3,10 +3,11 @@ import { vars } from '../../style.css';
 
 export const item = style({
   padding: '1rem',
-  backgroundColor: vars.color.accent,
+  backgroundColor: vars.color.secondary,
   margin: '10px',
   display: 'flex',
   alignItems: 'center',
+  border:`1px solid ${vars.color.accent}`
 });
 
 export const desc = style({
@@ -26,9 +27,10 @@ export const crossBtn = style({
 
 export const dropdown = style({
   backgroundColor: vars.color.secondary,
-  border: 'none',
+  border: `1px solid ${vars.color.border}`,
   padding: '10px',
   borderRadius: '6px',
+  width:`100%`,
 });
 
 export const tickBtn = style({

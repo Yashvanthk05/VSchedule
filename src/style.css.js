@@ -2,17 +2,17 @@ import { createTheme } from '@vanilla-extract/css';
 
 export const [themeClass, vars] = createTheme({
   color: {
-    primary: '#1e60ff',
-    secondary: '#eaf3ff',
+    primary: '#212529',
+    secondary: '#f8f9fa',
     danger: '#f24f4f',
-    accent: '#d0e4ff',
+    accent: '#dee2e6',
     base: '#dedede',
     text: '#1a1a1a',
     muted: '#7a7a7a',
     lunch: '#ffd166',
-    thead: '#a3cef1',
-    cell: '#D1F8EF',
-    border: '#d6d6d6',
+    thead: '#ced4da',
+    cell: '#e9ecef',
+    border: '#ced4da',
   },
 });
 
@@ -30,4 +30,9 @@ export const globalStyles = `@import url('https://fonts.googleapis.com/css2?fami
 
 ::-webkit-scrollbar {
   display: none;
+}
+
+#printTable{
+  margin-bottom: 20px;
+  border: 4px dashed ${vars.color.border};
 }`;

@@ -15,13 +15,14 @@ import {
   download,
   reset,
 } from './styles/Timetable.css';
+import { tttitle, tttext } from './styles/Table.css';
 import { generate_transform, getData, saveData, transform } from '../utils/functions';
 import { getTemplate } from '../utils/template';
 import QuickViz from './QuickViz';
 import { LuRefreshCcw } from 'react-icons/lu';
 import { HiDownload } from 'react-icons/hi';
 
-const Table = ({ table, tableid }) => {
+const Table = ({ table, tableid, hidden }) => {
   const [timetableData, setTimeTableData] = useState(getData());
   const [activeList, setActiveList] = useState([]);
   const timetable = getTemplate();
@@ -29,7 +30,7 @@ const Table = ({ table, tableid }) => {
 
   useEffect(() => {
     for (let slot of allSlots) {
-      const block = document.getElementById(slot+`_${tableid}`);
+      const block = document.getElementById(slot + `_${tableid}`);
       block.classList.remove(filled);
       block.classList.remove(clash);
       block.innerText = slot
@@ -41,21 +42,24 @@ const Table = ({ table, tableid }) => {
     for (let subject of table) {
       const transformedSlots = generate_transform(subject.split('-')[1].split(','));
       for (let slot of transformedSlots) {
-        const block = document.getElementById(slot+`_${tableid}`);
+        const block = document.getElementById(slot + `_${tableid}`);
         block.classList.add(filled);
         block.innerText += '\n' + subject.split('-')[0];
       }
     }
-    console.log('Table');
   }, [table]);
 
   return (
-    <div>
+    <div style={{ marginBottom: '2rem' , alignItems: 'center', display: 'flex', flexDirection: 'column'}}>
       <div>
         <div className={btns}>
+          {!hidden && (
           <button className={`${btn} ${reset}`} onClick={() => resetTimetable()}>
             <LuRefreshCcw /> Reset
           </button>
+        )}
+        
+          
           <button className={`${btn} ${download}`} onClick={() => window.print()}>
             <HiDownload /> Download
           </button>
@@ -127,6 +131,15 @@ const Table = ({ table, tableid }) => {
             ))}
           </tbody>
         </table>
+      </div>
+      <div className={tttext}>
+        <p className={tttitle}>Timetable {tableid+1}</p>
+        {table.map((subject) => (
+          <>
+            <span>{subject.split('-')[0]} - {subject.split('-')[1].split(',').map(i=>i.replaceAll('_','')).join('+')}</span>
+            <br />
+          </>
+        ))}
       </div>
     </div>
   );

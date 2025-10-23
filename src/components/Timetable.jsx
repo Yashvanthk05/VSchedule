@@ -14,18 +14,26 @@ import {
   btns,
   download,
   reset,
+  generate,
 } from './styles/Timetable.css';
 import { getData, saveData, transform } from '../utils/functions';
 import { getTemplate } from '../utils/template';
 import QuickViz from './QuickViz';
 import { LuRefreshCcw } from 'react-icons/lu';
 import { HiDownload } from 'react-icons/hi';
+import { useNavigate } from 'react-router';
+import { FaPlus } from "react-icons/fa";
 
 const Timetable = ({ refresh, setRefresh }) => {
   const [timetableData, setTimeTableData] = useState(getData());
   const [activeList, setActiveList] = useState([]);
   const timetable = getTemplate();
   const allSlots = transform([...Object.keys(getTemplate())]);
+
+  const navigate = useNavigate();
+      const handleRedirect = () => {
+        navigate('/generate');
+      };
 
   useEffect(() => {
     setTimeTableData(getData());
@@ -51,17 +59,19 @@ const Timetable = ({ refresh, setRefresh }) => {
     }
 
     for (let course of timetableData) {
-      const slots = transform(course.slots.split(',').map((s) => s.toLowerCase()));
-      for (let slot of slots) {
-        const block = document.getElementById(slot);
-        if (!timetable[slot].isFilled) {
-          timetable[slot].code = course.code;
-          timetable[slot].isFilled = true;
-          block.classList.add(filled);
-          block.innerText = course.code;
-        } else {
-          block.innerText += ` ${course.code}`;
-          block.classList.add(clash);
+      if (course.slots) {
+        const slots = transform(course.slots.split(',').map((s) => s.toLowerCase()));
+        for (let slot of slots) {
+          const block = document.getElementById(slot);
+          if (!timetable[slot].isFilled) {
+            timetable[slot].code = course.code;
+            timetable[slot].isFilled = true;
+            block.classList.add(filled);
+            block.innerText = `${block.innerText}\n${course.code}`;
+          } else {
+            block.innerText += ` ${course.code}`;
+            block.classList.add(clash);
+          }
         }
       }
     }
@@ -80,6 +90,9 @@ const Timetable = ({ refresh, setRefresh }) => {
         <div className={btns}>
           <button className={`${btn} ${reset}`} onClick={() => resetTimetable()}>
             <LuRefreshCcw /> Reset
+          </button>
+          <button className={`${btn} ${generate}`} onClick={handleRedirect}>
+            <FaPlus /> Generate
           </button>
           <button className={`${btn} ${download}`} onClick={() => window.print()}>
             <HiDownload /> Download

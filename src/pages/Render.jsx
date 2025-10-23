@@ -6,8 +6,10 @@ const Render = ({ refresh, setRefresh }) => {
     <div className={section}>
       <div className={secbody}>
         <p className={sechead}>TIMETABLE</p>
+        
         <Timetable refresh={refresh} setRefresh={setRefresh} />
       </div>
+      
     </div>
   );
 };

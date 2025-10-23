@@ -5,8 +5,8 @@ const Navbar = () => {
   return (
     <div className={navbar}>
       <div className={nav_section}>
-        <a href="/vit-ffcs-planner" className={navhead}>
-          FFCS Planner
+        <a href="/vschedule/" className={navhead}>
+          VSchedule
         </a>
       </div>
       <a

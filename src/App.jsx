@@ -16,7 +16,7 @@ const App = () => {
     metaView.setAttribute('name', 'viewport');
     metaView.setAttribute('content', 'width=device-width, initial-scale=1.0');
     document.head.appendChild(metaView);
-    document.title = 'VIT FFCS Planner';
+    document.title = 'VSchedule - VIT FFCS Planner';
     const styles = document.createElement('style');
     styles.textContent = globalStyles;
     document.head.appendChild(styles);
@@ -28,7 +28,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
         <Route path="/start" element={<Start />} />
-        <Route path="=/generate" element={<Generate />} />
+        <Route path="/generate" element={<Generate />} />
       </Routes>
     </div>
   );

@@ -88,7 +88,6 @@ const CourseItem = ({ course, handleDelete, id, handleChange, sem }) => {
       setSelectedSlotOg('');
     }
   };
-
   return (
     <div className={`${item} ${desc}`}>
       <span>{course.code}</span>
