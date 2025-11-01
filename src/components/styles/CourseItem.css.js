@@ -44,3 +44,7 @@ export const tickBtn = style({
   cursor: 'pointer',
   fontSize: '1.5rem',
 });
+
+export const clashStyle=style({
+  background: "rgb(255,0,0,0.3)",
+})

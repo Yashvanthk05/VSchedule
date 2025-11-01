@@ -5,7 +5,6 @@ import { desc, item } from './styles/CourseItem.css';
 
 
 const CourseList = ({ courses, handleDelete, handleChange, sem }) => {
-  console.log(courses);
   return (
     <div>
       <h2 className={sechead}>Course List</h2>
@@ -19,7 +18,7 @@ const CourseList = ({ courses, handleDelete, handleChange, sem }) => {
               <span className={listTitle}>Faculties</span>
               <span className={listTitle}>Actions</span>
             </div>
-            {courses.map((course, index) => (
+            {courses.sort((a,b)=> a.code.localeCompare(b.code)).map((course, index) => (
               <CourseItem
                 course={course}
                 handleDelete={handleDelete}
@@ -27,6 +26,7 @@ const CourseList = ({ courses, handleDelete, handleChange, sem }) => {
                 key={course.id}
                 handleChange={handleChange}
                 sem={sem}
+                courses={courses}
               />
             ))}
           </div>

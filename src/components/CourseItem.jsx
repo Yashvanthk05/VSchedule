@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { crossBtn, desc, dropdown, item, slot, tickBtn } from './styles/CourseItem.css';
+import { clashStyle, crossBtn, desc, dropdown, item, slot, tickBtn } from './styles/CourseItem.css';
 import toast from 'react-hot-toast';
 
-const CourseItem = ({ course, handleDelete, id, handleChange, sem }) => {
+const CourseItem = ({ course, handleDelete, id, handleChange, sem,courses }) => {
   const [slots, setSlots] = useState([]);
   const [faculties, setFaculties] = useState([]);
   const [selectedSlot, setSelectedSlot] = useState(course.slots);
@@ -18,6 +18,7 @@ const CourseItem = ({ course, handleDelete, id, handleChange, sem }) => {
     faculty: course.faculty,
   });
   const [data, setData] = useState([]);
+  const [clash,setClash] = useState(false);
 
   const handleCode = () => {
     const courseCode = course.code;
@@ -53,6 +54,23 @@ const CourseItem = ({ course, handleDelete, id, handleChange, sem }) => {
     }
   }, [data]);
 
+  console.log("Courses in CourseItem:",courses);
+
+  useEffect(() => {
+    const cur = (course?.slots || '').trim();
+    if (!cur) {
+      setClash(false);
+      return;
+    }
+    const hasClash = courses.some((c) => {
+      if (c.id === course.id) return false;
+      const other = (c?.slots || '').trim();
+      if (!other) return false;
+      return other.includes(cur) || cur.includes(other);
+    });
+    setClash(hasClash);
+  }, [courses, course.id, course.slots]);
+
   const handleSlot = (e) => {
     const input = e.target.value;
     setSelectedSlotOg(input);
@@ -71,8 +89,7 @@ const CourseItem = ({ course, handleDelete, id, handleChange, sem }) => {
     if (!matchingFaculties.includes(selectedFaculty.toUpperCase())) {
       setSelectedFaculty('');
     }
-  };
-
+  }
   const handleFaculty = (e) => {
     const input = e.target.value.toUpperCase();
     setSelectedFaculty(input);
@@ -90,7 +107,7 @@ const CourseItem = ({ course, handleDelete, id, handleChange, sem }) => {
     }
   };
   return (
-    <div className={`${item} ${desc}`}>
+    <div className={`${item} ${desc} ${clash ? clashStyle : ''}`}>
       <span>{course.code}</span>
       <span>{course.name}</span>
       <span>
