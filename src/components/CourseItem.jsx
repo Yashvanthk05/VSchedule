@@ -12,6 +12,7 @@ const CourseItem = ({ course, handleDelete, id, handleChange, sem }) => {
   );
   const [updatedCourse, setUpdatedCourse] = useState({
     id: id,
+    name: course.name,
     code: course.code,
     slots: course.slots,
     faculty: course.faculty,
