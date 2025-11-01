@@ -6,7 +6,6 @@ export const form = style({
   flexDirection: 'column',
   gap: '2rem',
   padding: '2rem',
-  width: '600px',
   backgroundColor: vars.color.secondary,
   margin: 'auto',
   border:`1px solid ${vars.color.border}`,

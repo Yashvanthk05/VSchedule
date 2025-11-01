@@ -5,6 +5,7 @@ import { desc, item } from './styles/CourseItem.css';
 
 
 const CourseList = ({ courses, handleDelete, handleChange, sem }) => {
+  console.log(courses);
   return (
     <div>
       <h2 className={sechead}>Course List</h2>
@@ -13,6 +14,7 @@ const CourseList = ({ courses, handleDelete, handleChange, sem }) => {
           <div>
             <div className={`${item} ${desc}`}>
               <span className={listTitle}>Course Code</span>
+              <span className={listTitle}>Course Name</span>
               <span className={listTitle}>Slots</span>
               <span className={listTitle}>Faculties</span>
               <span className={listTitle}>Actions</span>

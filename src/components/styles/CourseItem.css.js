@@ -12,7 +12,7 @@ export const item = style({
 
 export const desc = style({
   display: 'grid',
-  gridTemplateColumns: 'repeat(4, 1fr)',
+  gridTemplateColumns: 'repeat(5, 1fr)',
   gap: '0.5rem',
   textAlign: 'center',
 });
@@ -32,6 +32,10 @@ export const dropdown = style({
   borderRadius: '6px',
   width:`100%`,
 });
+
+export const slot=style({
+  width:"95px",
+})
 
 export const tickBtn = style({
   color: 'green',

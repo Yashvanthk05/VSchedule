@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { crossBtn, desc, dropdown, item, tickBtn } from './styles/CourseItem.css';
+import { crossBtn, desc, dropdown, item, slot, tickBtn } from './styles/CourseItem.css';
 import toast from 'react-hot-toast';
 
 const CourseItem = ({ course, handleDelete, id, handleChange, sem }) => {
@@ -91,17 +91,18 @@ const CourseItem = ({ course, handleDelete, id, handleChange, sem }) => {
   return (
     <div className={`${item} ${desc}`}>
       <span>{course.code}</span>
+      <span>{course.name}</span>
       <span>
         <select
           name="slots"
           id="slots"
-          className={dropdown}
+          className={`${dropdown} ${slot}`}
           onChange={handleSlot}
           value={selectedSlotOg}
           required
         >
           <option value="" disabled hidden>
-            Select Slot
+            Slot
           </option>
           {slots.map((item, index) => (
             <option key={index} value={item}>

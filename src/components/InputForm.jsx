@@ -52,7 +52,7 @@ const InputForm = ({
   const handleForm = (e) => {
     e.preventDefault();
     const inputCode = code;
-    const classObj = { id: v7(), code: inputCode, slots: '', faculty: '' };
+    const classObj = { id: v7(), code: inputCode,name: name, slots: '', faculty: '' };
     if (inputCode === '') {
       toast.error('Invalid input');
       return;
