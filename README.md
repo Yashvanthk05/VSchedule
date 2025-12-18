@@ -1,35 +1,42 @@
-# 📅 FFCS VIT Timetable Planner
+# VSCHEDULE - FFCS VIT Timetable Planner
 
 A sleek and efficient planner to help VIT students build their **FFCS** timetable with ease.
 
 ---
 
-## ✨ Features
+## Features
 
-- 📌 Select courses and visualize your weekly schedule
-- 🧠 Conflict detection
-- 💡 Clean UI for easy course management
-- 💾 Save and load timetable drafts
+- Select courses and visualize your weekly schedule
+- Conflict detection
+- Clean UI for easy course management
+- Save and load timetable drafts
 
 ---
 
-## 📸 Screenshots
+##  Screenshots
 
-**Add Courses**
-![Add Courses](./assets/start.png)
+**Initial View**
+![Initial View](./assets/start.png)
+
+**Add Courses (Suggestion)**
+![Add Courses](./assets/add_courses.png)
 
 **Course List**
-![Add Courses](./assets/courses.png)
+![Course List](./assets/courses_success.png)
 
 **Timetable View**
-![Add Courses](./assets/timetable_success.png)
+![Timetable View](./assets/timetable_success.png)
 
 **Clash Indication**
-![Add Courses](./assets/timetable_clash.png)
+![Course Clash Indication](./assets/courses_clash.png)
+![Timetable Clash Indication](./assets/timetable_clash.png)
+
+**Generate Timetable (Backtrack)**
+![Timetable Generation with Backtracking](./assets/timetable_generate.png)
 
 ---
 
-## 🛠️ Technologies Used
+## Technologies Used
 
 - HTML
 - CSS
@@ -38,7 +45,7 @@ A sleek and efficient planner to help VIT students build their **FFCS** timetabl
 
 ---
 
-## 🙋‍♂️ How It Works
+##  How It Works
 
 1. Choose the course code by searching the code/title.
 2. Add the course to the course list.
@@ -47,7 +54,7 @@ A sleek and efficient planner to help VIT students build their **FFCS** timetabl
 
 ---
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
 
