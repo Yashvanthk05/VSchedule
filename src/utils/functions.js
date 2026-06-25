@@ -1,5 +1,6 @@
 import { slotList } from './slotList';
-import falldata from '../models/winter.json';
+import fallData from '../models/fall.json';
+import winterData from '../models/winter.json';
 
 export const getData = () => {
   if (localStorage.getItem('ffcs_planner_data'))
@@ -28,7 +29,9 @@ export const validate = ({ code, slots, faculty }) => {
 export const transform = (slots) => {
   let transformedSlots = [];
   for (let slot of slots) {
-    transformedSlots = transformedSlots.concat(slotList.filter((s) => s.includes(slot)));
+    transformedSlots = transformedSlots.concat(
+      slotList.filter((s) => s.includes(slot.toLowerCase()))
+    );
   }
   return transformedSlots;
 };
@@ -36,9 +39,16 @@ export const transform = (slots) => {
 export const generate = () => {
   if (!localStorage.getItem('ffcs_planner_data')) return;
   const data = JSON.parse(localStorage.getItem('ffcs_planner_data'));
+  const activeSem = data[0]?.sem || 'winter';
+  const sourceData = activeSem === 'fall' ? fallData : winterData;
   const optimized = {};
   data.forEach((subject) => {
-    const all = falldata.filter((item) => item['COURSE CODE'] === subject.code);
+    let all = sourceData.filter((item) => item['COURSE CODE'] === subject.code);
+    if (subject.faculty) {
+      all = all.filter(
+        (item) => item['EMPLOYEE NAME'].toUpperCase() === subject.faculty.toUpperCase()
+      );
+    }
     let uniqueSlots;
     if (subject.slots) {
       uniqueSlots = [subject.slots];
@@ -113,11 +123,5 @@ export const generate = () => {
 };
 
 export const generate_transform = (slots) => {
-  let transformedSlots = [];
-  for (let slot of slots) {
-    transformedSlots = transformedSlots.concat(
-      slotList.filter((i) => i.includes(slot.toLowerCase()))
-    );
-  }
-  return transformedSlots;
+  return transform(slots);
 };

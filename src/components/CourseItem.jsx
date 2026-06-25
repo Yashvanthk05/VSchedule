@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { clashStyle, crossBtn, desc, dropdown, item, slot, tickBtn } from './styles/CourseItem.css';
 import toast from 'react-hot-toast';
 
-const CourseItem = ({ course, handleDelete, id, handleChange, sem,courses }) => {
+const CourseItem = ({ course, handleDelete, id, handleChange, sem, courses }) => {
   const [slots, setSlots] = useState([]);
   const [faculties, setFaculties] = useState([]);
   const [selectedSlot, setSelectedSlot] = useState(course.slots);
@@ -16,6 +16,7 @@ const CourseItem = ({ course, handleDelete, id, handleChange, sem,courses }) => 
     code: course.code,
     slots: course.slots,
     faculty: course.faculty,
+    sem: sem,
   });
   const [data, setData] = useState([]);
   const [clash,setClash] = useState(false);
@@ -62,11 +63,13 @@ const CourseItem = ({ course, handleDelete, id, handleChange, sem,courses }) => 
       setClash(false);
       return;
     }
+    const curSlots = cur.split(',').filter(Boolean);
     const hasClash = courses.some((c) => {
       if (c.id === course.id) return false;
       const other = (c?.slots || '').trim();
       if (!other) return false;
-      return other.includes(cur) || cur.includes(other);
+      const otherSlots = other.split(',').filter(Boolean);
+      return curSlots.some((s) => otherSlots.includes(s));
     });
     setClash(hasClash);
   }, [courses, course.id, course.slots]);
@@ -80,7 +83,7 @@ const CourseItem = ({ course, handleDelete, id, handleChange, sem,courses }) => 
       slotstr += `_${slotarr[i]}_,`;
     }
     slotstr += `_${slotarr[slotarr.length - 1]}_`;
-    setUpdatedCourse({ ...updatedCourse, slots: slotstr });
+    setUpdatedCourse({ ...updatedCourse, slots: slotstr, sem: sem });
     setSelectedSlot(slotstr);
     const matchingFaculties = data
       .filter((item) => item['COURSE CODE'] === course.code && item.SLOT === input)
@@ -93,7 +96,7 @@ const CourseItem = ({ course, handleDelete, id, handleChange, sem,courses }) => 
   const handleFaculty = (e) => {
     const input = e.target.value.toUpperCase();
     setSelectedFaculty(input);
-    setUpdatedCourse({ ...updatedCourse, faculty: input });
+    setUpdatedCourse({ ...updatedCourse, faculty: input, sem: sem });
     const matchingSlots = data
       .filter(
         (item) =>
