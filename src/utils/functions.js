@@ -39,9 +39,11 @@ export const transform = (slots) => {
 export const generate = () => {
   if (!localStorage.getItem('ffcs_planner_data')) return;
   const data = JSON.parse(localStorage.getItem('ffcs_planner_data'));
+  if (data.length === 0) return [];
   const activeSem = data[0]?.sem || 'winter';
   const sourceData = activeSem === 'fall' ? fallData : winterData;
-  const optimized = {};
+
+  const subjectEntries = [];
   data.forEach((subject) => {
     let all = sourceData.filter((item) => item['COURSE CODE'] === subject.code);
     if (subject.faculty) {
@@ -64,18 +66,18 @@ export const generate = () => {
         )
       );
     }
-    optimized[subject.code] = uniqueSlots;
+    subjectEntries.push({ id: subject.id, code: subject.code, slots: uniqueSlots });
   });
 
-  const subjects = Object.keys(optimized);
-  const n = subjects.length;
+  const n = subjectEntries.length;
+  if (n === 0) return [];
 
   const partIndex = new Map();
   let nextPart = 0;
 
   const subjectOptions = {};
-  for (const subject of subjects) {
-    const slotsArr = optimized[subject] || [];
+  for (const entry of subjectEntries) {
+    const slotsArr = entry.slots || [];
     const opts = [];
     for (const slot of slotsArr) {
       const slotParts = slot.split(',').map((p) => p.trim());
@@ -89,11 +91,11 @@ export const generate = () => {
       }
       opts.push({ slot, parts: slotParts, mask });
     }
-    subjectOptions[subject] = opts;
+    subjectOptions[entry.id] = opts;
   }
 
-  const orderedSubjects = subjects.slice().sort((a, b) => {
-    return (subjectOptions[a].length || 0) - (subjectOptions[b].length || 0);
+  const orderedEntries = subjectEntries.slice().sort((a, b) => {
+    return (subjectOptions[a.id].length || 0) - (subjectOptions[b.id].length || 0);
   });
 
   const results = [];
@@ -104,15 +106,15 @@ export const generate = () => {
       results.push(Array.from(chosen));
       return;
     }
-    const subject = orderedSubjects[index];
-    const opts = subjectOptions[subject] || [];
+    const entry = orderedEntries[index];
+    const opts = subjectOptions[entry.id] || [];
     if (opts.length === 0) {
       return;
     }
     for (let i = 0; i < opts.length; ++i) {
       const opt = opts[i];
       if ((usedMask & opt.mask) === 0n) {
-        chosen[index] = `${subject}-${opt.slot}`;
+        chosen[index] = `${entry.code}-${opt.slot}`;
         backtrack(index + 1, usedMask | opt.mask);
       }
     }
